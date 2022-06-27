@@ -1,18 +1,19 @@
 import React from 'react';
-import s from './Profile.module.css';
-import MyPosts from './MyPosts/MyPosts';
 
+/* Styles (modules) */ 
+import s from './Profile.module.css';
+
+/* Components */ 
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import PostsContainer from './Posts';
 
 const Profile = () => {
-    return <div className={s.content}>
-        <div>
-            <img src ='https://swall.teahub.io/photos/small/0-7025_nature-wallpaper-with-flowers-image-good-morning-photo.jpg'></img>
-        </div>
-        <div>
-            ava + descr
-        </div>
-        <MyPosts />
+  return (
+    <div className={s.profile_page}>
+      <ProfileInfo />
+      <PostsContainer />
     </div>
-}
+  );
+};
 
 export default Profile;
