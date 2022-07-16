@@ -1,0 +1,9 @@
+@import "normalize";
+
+/* Pages */ 
+@import './pages/profile/styles.scss';
+@import './pages/users/styles.scss';
+
+/* Components */ 
+@import './components/navigation.scss';
+@import './components/MyPosts.scss';
