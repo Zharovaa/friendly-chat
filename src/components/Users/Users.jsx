@@ -12,27 +12,28 @@ import {
 import { render } from 'react-dom';
 import { NavLink } from 'react-router-dom';
 import { usersAPI } from '../../api/api';
-
+import onPageChanged from './UsersContainer';
+import pages from './UsersContainer'
+import props from './UsersContainer'
 
 const Users = props => {
   // Getting the users when the page is loaded
   useEffect(() => {
     props.toggleIsFetching(true);
     usersAPI.getUsers(props.currentPage, props.pageSize).then(data => {
-        props.toggleIsFetching(false);
-        props.setUsers(data.items);
-      });
+      props.toggleIsFetching(false);
+      props.setUsers(data.items);
+    });
   }, []);
 
   // Function after on click on the page
   const onPageChanged = (event, value) => {
     props.setCurrentPage(value);
     props.toggleIsFetching(true);
-    usersAPI.getUsers(event, props.pageSize)
-      .then(data => {
-        props.toggleIsFetching(false);
-        props.setUsers(data.items);
-      });
+    usersAPI.getUsers(event, props.pageSize).then(data => {
+      props.toggleIsFetching(false);
+      props.setUsers(data.items);
+    });
   };
 
   // Getting the count of the pages
@@ -44,44 +45,44 @@ const Users = props => {
     pages.push(i);
   }
 
-  /* Unfollow functionality */
-  async function unfollowUser() {
-    
-      props.toggleFollowingProgress(true, Users.id);
-  
+  /* follow functionality */
+  async function followUser(userId) {
+    props.toggleIsFetching(true, userId);
     await axios
-      .delete(
-        `https://social-network.samuraijs.com/api/1.0/follow/${Users.id}`,
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`,
         {
           withCredentials: true,
           headers: {
-            'API-KEY': '9a450d4a-5747-4ddd-acd5-0693071efaea',
+            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
           },
         }
       )
       .then(response => {
-        if (response.data.resultCode === 0) {
-          props.follow(Users.id);
-        }
-        props.toggleFollowingProgress(false, Users.id);
+        props.toggleIsFetching(false);
+        props.setUsers(response.data.items);
+        props.setTotalUsersCount(response.data.totalCount);
       });
   }
 
-  /* follow functionality */
-  async function followUser() {
-    await axios
-      .post(
-        `https://social-network.samuraijs.com/api/1.0/follow/${Users.id}`,
+
+     onPageChanged = (pageNumber) => {
+    props.setCurrentPage(pageNumber);
+    props.toggleIsFetching(true);
+     axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`,
         {},
         { withCredentials: true }
       )
       .then(response => {
-        if (response.data.resultCode === 0) {
-          props.follow(Users.id);
-        }
-      });
-  }
-  return (
+        props.toggleIsFetching(false);
+        props.setUsers(response.data.items);
+        props.setTotalUsersCount(response.data.totalCount);
+        });
+      }
+    }
+   (
     <div>
       <Typography variant="h3" sx={{ marginBottom: '20px' }}>
         Users
@@ -127,11 +128,50 @@ const Users = props => {
                 </Box>
               </Box>
               {user.followed ? (
-                <Button disabled={props.followingInProgress}variant="contained" onClick={unfollowUser}>
+                <Button
+                  onClick={userId => {
+                    axios
+                      .delete(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+                        {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
+                          },
+                        }
+                      )
+
+                      .then(response => {
+                        if (response.data.resultCode === 0) {
+                          props.unfollow(userId);
+                        }
+                      });
+                  }}
+                >
                   Unfollow
                 </Button>
               ) : (
-                <Button disabled={props.followingInProgress} variant="contained" onClick={followUser}>
+                <Button
+                  onClick={userId => {
+                    axios
+                      .post(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+                        {},
+                        {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
+                          },
+                        }
+                      )
+
+                      .then(response => {
+                        if (response.data.resultCode === 0) {
+                          props.follow(userId);
+                        }
+                      });
+                  }}
+                >
                   Follow
                 </Button>
               )}
@@ -142,6 +182,6 @@ const Users = props => {
       <Pagination count={pages.length} onChange={onPageChanged} />
     </div>
   );
-};
+
 
 export default Users;
