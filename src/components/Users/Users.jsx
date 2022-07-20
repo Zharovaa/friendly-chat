@@ -1,26 +1,24 @@
-import React, { useEffect } from 'react';
-import * as axios from 'axios';
+import React, { useEffect } from "react";
+import * as axios from "axios";
 import {
   Avatar,
   Box,
   Button,
   CircularProgress,
   Pagination,
-  Stack,
   Typography,
-} from '@mui/material';
-import { render } from 'react-dom';
-import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
-import onPageChanged from './UsersContainer';
-import pages from './UsersContainer'
-import props from './UsersContainer'
+} from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { usersAPI } from "../../api/api";
+import onPageChanged from "./UsersContainer";
+import pages from "./UsersContainer";
+import props from "./UsersContainer";
 
-const Users = props => {
+const Users = (props) => {
   // Getting the users when the page is loaded
   useEffect(() => {
     props.toggleIsFetching(true);
-    usersAPI.getUsers(props.currentPage, props.pageSize).then(data => {
+    usersAPI.getUsers(props.currentPage, props.pageSize).then((data) => {
       props.toggleIsFetching(false);
       props.setUsers(data.items);
     });
@@ -28,9 +26,10 @@ const Users = props => {
 
   // Function after on click on the page
   const onPageChanged = (event, value) => {
+    console.log("%c%s", "color: #ff0000", "Data: ", event);
     props.setCurrentPage(value);
     props.toggleIsFetching(true);
-    usersAPI.getUsers(event, props.pageSize).then(data => {
+    usersAPI.getUsers(value, props.pageSize).then((data) => {
       props.toggleIsFetching(false);
       props.setUsers(data.items);
     });
@@ -54,73 +53,72 @@ const Users = props => {
         {
           withCredentials: true,
           headers: {
-            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
+            "API-KEY": "a16e8cdf-2042-4cb2-af48-ce1852e97588",
           },
         }
       )
-      .then(response => {
+      .then((response) => {
         props.toggleIsFetching(false);
         props.setUsers(response.data.items);
         props.setTotalUsersCount(response.data.totalCount);
       });
   }
 
+  // const onPageChanged = (pageNumber) => {
+  //   props.setCurrentPage(pageNumber);
+  //   props.toggleIsFetching(true);
+  //   axios
+  //     .get(
+  //       `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`,
+  //       {},
+  //       { withCredentials: true }
+  //     )
+  //     .then((response) => {
+  //       props.toggleIsFetching(false);
+  //       props.setUsers(response.data.items);
+  //       props.setTotalUsersCount(response.data.totalCount);
+  //     });
+  // };
 
-     onPageChanged = (pageNumber) => {
-    props.setCurrentPage(pageNumber);
-    props.toggleIsFetching(true);
-     axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`,
-        {},
-        { withCredentials: true }
-      )
-      .then(response => {
-        props.toggleIsFetching(false);
-        props.setUsers(response.data.items);
-        props.setTotalUsersCount(response.data.totalCount);
-        });
-      }
-    }
-   (
+  return (
     <div>
-      <Typography variant="h3" sx={{ marginBottom: '20px' }}>
+      <Typography variant="h3" sx={{ marginBottom: "20px" }}>
         Users
       </Typography>
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          height: '50vh',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          height: "50vh",
         }}
       >
         {props.isFetching ? (
           <CircularProgress color="secondary" />
         ) : (
-          props.users.map(user => (
+          props.users.map((user) => (
             <Box
               sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'row',
-                borderBottom: '1px solid grey',
-                justifyContent: 'space-between',
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                borderBottom: "1px solid grey",
+                justifyContent: "space-between",
 
-                paddingBottom: '20px',
+                paddingBottom: "20px",
               }}
               key={user.id}
             >
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <NavLink to={'/profile/' + user.id}>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <NavLink to={"/profile/" + user.id}>
                   <Avatar alt="Remy Sharp" src={user.photos.small} />
                 </NavLink>
                 <Box
                   sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    marginLeft: '10px',
+                    display: "flex",
+                    flexDirection: "column",
+                    marginLeft: "10px",
                   }}
                 >
                   <Typography variant="h5">{user.name}</Typography>
@@ -129,19 +127,19 @@ const Users = props => {
               </Box>
               {user.followed ? (
                 <Button
-                  onClick={userId => {
+                  onClick={(userId) => {
                     axios
                       .delete(
                         `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
                         {
                           withCredentials: true,
                           headers: {
-                            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
+                            "API-KEY": "a16e8cdf-2042-4cb2-af48-ce1852e97588",
                           },
                         }
                       )
 
-                      .then(response => {
+                      .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.unfollow(userId);
                         }
@@ -152,7 +150,7 @@ const Users = props => {
                 </Button>
               ) : (
                 <Button
-                  onClick={userId => {
+                  onClick={(userId) => {
                     axios
                       .post(
                         `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
@@ -160,12 +158,12 @@ const Users = props => {
                         {
                           withCredentials: true,
                           headers: {
-                            'API-KEY': 'a16e8cdf-2042-4cb2-af48-ce1852e97588',
+                            "API-KEY": "a16e8cdf-2042-4cb2-af48-ce1852e97588",
                           },
                         }
                       )
 
-                      .then(response => {
+                      .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.follow(userId);
                         }
@@ -182,6 +180,5 @@ const Users = props => {
       <Pagination count={pages.length} onChange={onPageChanged} />
     </div>
   );
-
-
+};
 export default Users;
