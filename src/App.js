@@ -1,29 +1,27 @@
-import React from 'react';
-import UsersContainer from './components/Users/UsersContainer';
+import React from "react";
+
 /* Styles */
-import './assets/scss/main.scss';
+import "./assets/scss/main.scss";
 
 /* Components */
-// import Navbar from './components/Navbar/Navbar';
-import Navigation from './components/Navigation/Navigation';
-import Profile from './components/Profile/Profile';
-import Users from './components/Users/Users';
-import DialogsContainer from './components/Dialogs/Message/DialogsContainer';
+import Navigation from "./components/Navigation/Navigation";
+import UsersPage from "./components/Users/";
+import ProfilePage from "./components/Profile/Profile";
+import DialogsPage from "./components/Dialogs/Message/DialogsContainer";
 
 /* Libraries */
-import { Switch, Route } from 'react-router-dom';
-import { Container } from '@mui/material';
-
+import { Switch, Route } from "react-router-dom";
+import { Container } from "@mui/material";
 
 const App = () => {
   return (
     <div className="app-wrapper">
       <Navigation />
-      <Container fixed sx={{ padding: '30px 0' }}>
+      <Container fixed sx={{ padding: "30px 0" }}>
         <Switch>
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/profile/:userId?" render={() => <Profile />} />
-          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/dialogs" render={() => <DialogsPage />} />
+          <Route path="/profile/:userId?" render={() => <ProfilePage />} />
+          <Route path="/users" render={() => <UsersPage />} />
         </Switch>
       </Container>
     </div>
