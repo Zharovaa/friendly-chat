@@ -5,23 +5,23 @@ import { usersAPI } from "../../../api/api";
 
 const User = ({ user, follow, unfollow }) => {
   /* Hooks */
-  const [subscriptionLoading, SetSubscriptionLoading] = useState(false);
+  const [subscriptionLoading, setSubscriptionLoading] = useState(false);
 
   /* Function after on click on the page */
   const followUser = (userId) => {
-    SetSubscriptionLoading(true);
+    setSubscriptionLoading(true);
     usersAPI.followUser(userId).then((data) => {
       follow(userId);
-      SetSubscriptionLoading(false);
+      setSubscriptionLoading(false);
     });
   };
 
   /* Function after on click on the page */
   const unfollowUser = (userId) => {
-    SetSubscriptionLoading(true);
+    setSubscriptionLoading(true);
     usersAPI.unfollowUser(userId).then((data) => {
       unfollow(userId);
-      SetSubscriptionLoading(false);
+      setSubscriptionLoading(false);
     });
   };
 
