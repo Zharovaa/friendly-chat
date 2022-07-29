@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation/Navigation";
 import UsersPage from "./components/Users/";
 import ProfilePage from "./components/Profile/Profile";
 import DialogsPage from "./components/Dialogs/Message/DialogsContainer";
+import Login from "./components/Login/Login";
 
 /* Libraries */
 import { Switch, Route } from "react-router-dom";
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/dialogs" render={() => <DialogsPage />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />
           <Route path="/users" render={() => <UsersPage />} />
+          <Route path= "/login" render ={() => <Login />}/>
         </Switch>
       </Container>
     </div>

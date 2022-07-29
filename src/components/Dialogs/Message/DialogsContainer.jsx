@@ -7,11 +7,16 @@ import updateNewMessageBodyCreator from './Message';
 
 
 
+
 let mapStateToProps = (state) => {
+  
   return {
-    dialogsPage: state.dialogsPage
+    dialogsPage: state.dialogsPage,
+    isAuth: state.auth.isAuth,
   }
+  
 }
+
 
 let mapDispatchToProps = (dispatch) => {
   return {
@@ -21,7 +26,14 @@ let mapDispatchToProps = (dispatch) => {
     sendMessage: (body) => {
       dispatch(updateNewMessageBodyCreator(body));
     }
+    
   }
+
+}
+
+let AuthRedirectComponent = (props) => {
+  if (!props.isAuth === false) return <Redirect to="/login" />;
+  return <Dialogs {...props}/>
 }
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
