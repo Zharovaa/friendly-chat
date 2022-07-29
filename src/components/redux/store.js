@@ -1,5 +1,4 @@
-import dispatch from "react";
-import action from "react";
+
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
@@ -52,5 +51,6 @@ let store = {
   },
 };
 
-window.store = store;
+
+
 export default store;
