@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo';
 import * as axios from 'axios';
-import { Redirect, withRouter } from 'react-router-dom';
 import { setUserProfile } from '../../redux/profile-reducer';
+import AuthRedirect from '../../../hoc/AuthRedirect';
+import { withRouter } from 'react-router';
+import { compose } from 'redux';
 
 const ProfileContainer = props => {
   useEffect(() => {
@@ -15,21 +15,12 @@ const ProfileContainer = props => {
       .then(response => {
         props.setUserProfile(response.data);
       });
-     
   }, []);
 
-
-
-
   return <ProfileInfo {...props} profile={props.profile} />;
-  
 };
 
-let AuthRedirectComponent = (props) => {
-  if (!props.isAuth === false) return <Redirect to="/login" />;
-  return <ProfileContainer {...props}/>
-}
-
+let AuthRedirectComponent = AuthRedirect(ProfileContainer);
 
 let mapStateToProps = state => ({
   profile: state.profilePage.profile,
@@ -37,6 +28,7 @@ let mapStateToProps = state => ({
 });
 
 export default compose(
-  withRouter(AuthRedirectComponent),
-  connect(mapStateToProps, { setUserProfile })
+  connect(mapStateToProps, { setUserProfile }),
+  withRouter,
+  AuthRedirectComponent,
 )(ProfileContainer);
