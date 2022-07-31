@@ -1,4 +1,3 @@
-
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
@@ -50,7 +49,5 @@ let store = {
     this._callSubscriber(this._state);
   },
 };
-
-
 
 export default store;

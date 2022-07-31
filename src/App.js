@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/dialogs" render={() => <DialogsPage />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />
           <Route path="/users" render={() => <UsersPage />} />
-          <Route path= "/login" render ={() => <Login />}/>
+          <Route path="/login" render={() => <Login />} />
         </Switch>
       </Container>
     </div>

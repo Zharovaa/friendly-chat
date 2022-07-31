@@ -1,13 +1,12 @@
-.messages{
-    padding: 10px;
+.messages {
+  padding: 10px;
 }
 
-.messages.message{
-    color: white;
+.messages.message {
+  color: white;
 }
 
-
-.dialogsItems{
-    padding: 10px;
-    color: white;
+.dialogsItems {
+  padding: 10px;
+  color: white;
 }
