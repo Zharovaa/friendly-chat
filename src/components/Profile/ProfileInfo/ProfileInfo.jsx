@@ -2,6 +2,8 @@ import { CircularProgress, Container, Typography } from "@mui/material";
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import background from "../../../assets/img/profile-background.jpg";
+import ProfileStatus from './ProfileStatus'
+
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -10,6 +12,7 @@ const ProfileInfo = (props) => {
   return (
     <Container>
       <img src={props.profile.photos.large} />
+     
       <Typography
         variant="h5"
         sx={{
@@ -25,9 +28,15 @@ const ProfileInfo = (props) => {
           fontFamily: "Patrick Hand",
         }}
       >
+        
         Dasha Zharova
+        
       </Typography>
+      <ProfileStatus/>
     </Container>
+    
+    
+    
   );
 };
 
