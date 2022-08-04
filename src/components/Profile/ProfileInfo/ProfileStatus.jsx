@@ -5,9 +5,7 @@ const ProfileStatus = ({ status }) => {
   const [localStatus, setLocalStatus] = useState('');
   const [editMode, setEditMode] = useState(false);
 
-  const switchMode = () => {
-    setEditMode(!editMode)
-  }
+
 
   return (
     <Stack direction={'row'} spacing={2}>
@@ -18,7 +16,7 @@ const ProfileStatus = ({ status }) => {
         value={localStatus}
         onChange={(event) => setLocalStatus(event.target.value)}
       />
-      <Button onCLick={switchMode} variant="contained">
+      <Button onClick={() => setEditMode(!editMode)} variant="contained">
         {editMode ? 'Save' : 'Edit'}
       </Button>
     </Stack>
