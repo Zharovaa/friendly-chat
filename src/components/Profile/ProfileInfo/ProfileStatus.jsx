@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button, Stack, TextField } from '@mui/material';
 
-const ProfileStatus = props => {
+const ProfileStatus = ({ status }) => {
+  const [localStatus, setLocalStatus] = useState('');
+  const [editMode, setEditMode] = useState(false);
+
+  const switchMode = () => {
+    setEditMode(!editMode)
+  }
+
   return (
-    <>
-      <div>
-        <span>{props.status}</span>
-      </div>
-      <div>
-        <input value={props.status}></input>
-      </div>
-    </>
+    <Stack direction={'row'} spacing={2}>
+      <TextField
+        disabled={!editMode}
+        variant="filled"
+        label="Status"
+        value={localStatus}
+        onChange={(event) => setLocalStatus(event.target.value)}
+      />
+      <Button onCLick={switchMode} variant="contained">
+        {editMode ? 'Save' : 'Edit'}
+      </Button>
+    </Stack>
   );
 };
 
