@@ -5,9 +5,11 @@ const ProfileStatus = ({ status }) => {
   const [localStatus, setLocalStatus] = useState(status);
   const [editMode, setEditMode] = useState(false);
 
+
+
   return (
     <Stack direction={'row'} spacing={2}>
-      <TextField``
+      <TextField
         disabled={!editMode}
         variant="filled"
         label="Status"

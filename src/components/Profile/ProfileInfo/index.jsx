@@ -6,6 +6,8 @@ import { withAuthRedirect } from "../../../hoc/AuthRedirect";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import getStatus from '../../redux/profile-reducer';
+import updateStatus from '../../redux/profile-reducer';
 
 const ProfileContainer = (props) => {
   useEffect(() => {
@@ -15,20 +17,23 @@ const ProfileContainer = (props) => {
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then((response) => {
         props.setUserProfile(response.data);
+        props.getStatus(userId);
       });
+  
   }, []);
 
-  return <ProfileInfo {...props} profile={props.profile} />;
+  return <ProfileInfo {...props} profile={props.profile} status={props.status} updateStatus={props.updateStatus} />;
 };
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   isAuth: state.auth.isAuth,
+  status: state.profilePage.status,
 });
 
 /* Redirect included */
 export default compose(
-  connect(mapStateToProps, { setUserProfile }),
+  connect(mapStateToProps, { setUserProfile, getStatus, updateStatus }),
   withRouter,
   // withAuthRedirect
 )(ProfileContainer);

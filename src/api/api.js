@@ -8,6 +8,15 @@ const instance = axios.create({
   },
 });
 
+export const profileAPI = {
+  getStatus(userId) {
+    return instance.get(`profile/` + userId)
+  },
+  updateStatus(status){
+    return instance.put(`status`, {status: status}); 
+  }
+}
+
 export const usersAPI = {
   async getUsers(currentPage, pageSize) {
     const res = await instance
