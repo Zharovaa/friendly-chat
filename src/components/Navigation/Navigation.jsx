@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 const pages = ["Users", "Messages", "News", "Music"];
-const settings = ["Profile", "Sign in"];
+const settings = ["Profile", "Sign-in"];
 
 const Navigation = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

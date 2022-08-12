@@ -42,6 +42,15 @@ const SignIn = props => {
     setValues({ ...values, [prop]: value });
   };
 
+const submitData = () => {
+  console.log('SignIn: ', values)
+  return setValues({
+    email: '',
+    password: '',
+    rememberMe: false,
+  }) 
+}
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -104,7 +113,7 @@ const SignIn = props => {
           />
           <Button
             fullWidth
-            onClick={() => console.log('SignIn: ', values)}
+            onClick={() => submitData()}
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
