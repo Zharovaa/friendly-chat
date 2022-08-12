@@ -12,8 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Form, Field } from 'react-final-form';
-import { reduxForm } from 'redux-form';
 
 function Copyright(props) {
   return (
@@ -33,102 +31,102 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const SignIn = props => {
+  const [values, setValues] = React.useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
 
-const SignInForm = (props) => {
+  const handleChange = (prop, value) => {
+    setValues({ ...values, [prop]: value });
+  };
+
   return (
-    <Form onSubmit={props.handleSubmit}>
-      <SignInReduxForm />
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={props.handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={values.email}
+            onChange={event => handleChange('email', event.target.value)}
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            value={values.password}
+            onChange={event => handleChange('password', event.target.value)}
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value="remember"
+                checked={values.rememberMe}
+                onChange={event =>
+                  handleChange('rememberMe', event.target.checked)
+                }
+                color="primary"
+              />
+            }
+            label="Remember me"
+          />
+          <Button
+            fullWidth
+            onClick={() => console.log('SignIn: ', values)}
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={props.handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <Field
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <Field
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Container>
-      </ThemeProvider>
-    </Form>
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 };
 
-
-
-export default function SignIn() {
-  const handleSubmit = event => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const onSubmit = props => {
-      <SignInReduxForm onSubmit={onSubmit} />;
-      console.log({
-        email: props.data.get('email'),
-        password: props.data.get('password'),
-      });
-    };
-  };
-
-}
-const SignInReduxForm = reduxForm({ form: 'Sign In ' })(SignInForm)
+export default SignIn;
