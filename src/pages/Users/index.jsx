@@ -6,9 +6,8 @@ import {
   toggleIsFetching,
   unfollow,
   getUsers,
-} from "../redux/users-reducer";
+} from "../../redux/users-reducer";
 import Users from "./Users";
-import setUsersTotalCount from "./Users";
 import toggleFollowingProgress from "./Users";
 
 let mapStateToProps = (state) => {

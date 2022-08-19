@@ -4,11 +4,11 @@ import React from "react";
 import "./assets/scss/main.scss";
 
 /* Components */
-import Navigation from "./components/Navigation/Navigation";
-import UsersPage from "./components/Users/";
-import ProfilePage from "./components/Profile/Profile";
-import DialogsPage from "./components/Dialogs/Message/DialogsContainer";
-import SignIn from "./components/SignIn/SignIn";
+import Navigation from "./components/Navigation";
+import UsersPage from "./pages/Users/";
+import ProfilePage from "./pages/Profile/";
+import SignIn from "./pages/SignIn/SignIn";
+import MessagesPage from "./pages/Messages/";
 
 /* Libraries */
 import { Switch, Route } from "react-router-dom";
@@ -20,7 +20,7 @@ const App = () => {
       <Navigation />
       <Container fixed sx={{ padding: "30px 0" }}>
         <Switch>
-          <Route path="/dialogs" render={() => <DialogsPage />} />
+          <Route path="/messages/:dialogId?" render={() => <MessagesPage />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />
           <Route path="/users" render={() => <UsersPage />} />
           <Route path="/sign-in" render={() => <SignIn />} />

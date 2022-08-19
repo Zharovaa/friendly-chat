@@ -1,4 +1,4 @@
-import { usersAPI } from "../../api/api";
+import { usersAPI } from "../api/api";
 import setTotalUsersCount from "./auth-reducer";
 import page from "./auth-reducer";
 
