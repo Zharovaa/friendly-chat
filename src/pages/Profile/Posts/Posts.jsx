@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./Posts.module.css";
 import Post from "./Post/Post";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";

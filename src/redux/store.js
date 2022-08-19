@@ -1,6 +1,5 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
 
 let store = {
   _state: {
@@ -11,7 +10,7 @@ let store = {
       ],
       newPostText: "friendly-chat.com",
     },
-    dialogsPage: {
+    messagesPage: {
       messages: [
         { id: 1, message: "Hi", likesCount: 12 },
         { id: 2, message: "How are you?", likesCount: 12 },
@@ -29,7 +28,6 @@ let store = {
       ],
       newMessageBody: "",
     },
-    sidebar: {},
   },
   _callSubscriber() {},
   getState() {
@@ -44,7 +42,6 @@ let store = {
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
     this._callSubscriber(this._state);
   },

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { usersAPI } from "../../api/api";
 
 /* Components */
 import User from "./Components/User";
@@ -11,6 +10,7 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
+import { usersAPI } from "../../api/api";
 
 const Users = (props) => {
   /* MapStateToProps */

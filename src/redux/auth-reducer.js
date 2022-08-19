@@ -1,4 +1,4 @@
-import authAPI from "./dialogs-reducer";
+import authAPI from "./messages-reducer";
 
 const SET_USER_DATA = "SET_USER_DATA";
 
