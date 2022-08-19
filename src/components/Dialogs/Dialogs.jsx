@@ -5,7 +5,9 @@ import Message from "./Message/Message";
 import { useState } from "react";
 import { Redirect } from "react-router";
 
+
 const Dialogs = (props) => {
+  
   let state = props.dialogsPage;
 
   const [value, setValue] = useState("My new post message");

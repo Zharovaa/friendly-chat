@@ -46,7 +46,7 @@ const MyPosts = (props) => {
             width: "90%",
           }}
           id="standard-basic"
-          label="Message"
+          label="Add description"
           variant="standard"
           onChange={(e) => setValue(e.target.value)}
           value={value}
