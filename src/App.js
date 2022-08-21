@@ -20,7 +20,7 @@ const App = () => {
       <Navigation />
       <Container fixed sx={{ padding: "30px 0" }}>
         <Switch>
-          <Route path="/messages" render={() => <MessagesPage />} />
+          <Route path="/messages/:dialogId?" render={() => <MessagesPage />} />
           <Route path="/profile/:userId?" render={() => <ProfilePage />} />
           <Route path="/users" render={() => <UsersPage />} />
           <Route path="/sign-in" render={() => <SignIn />} />

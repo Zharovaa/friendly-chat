@@ -23,7 +23,7 @@ import {
 const drawerWidth = 240;
 export default function MessagesPage(props) {
   const { dialogId } = useParams();
-  console.log("%c%s", "color: #733d00", "D: ", dialogId);
+
   /* State */
   const [value, setValue] = React.useState("");
 
@@ -99,9 +99,10 @@ export default function MessagesPage(props) {
           <Button
             sx={{ width: "30%" }}
             variant="contained"
+            disabled={value === ''}
             onClick={() => {
-              setValue("");
               props.sendMessage(value);
+              setValue("");
             }}
           >
             Send

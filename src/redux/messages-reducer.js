@@ -14,9 +14,7 @@ let initialState = {
     { id: 3, name: "Andrey" },
     { id: 4, name: "Polina" },
     { id: 5, name: "Misha" },
-    { id: 6, name: "Sasha" },
   ],
-  newMessageBody: "",
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -24,7 +22,6 @@ const messagesReducer = (state = initialState, action) => {
     case SEND_MESSAGE:
       return {
         ...state,
-        newMessageBody: "",
         messages: [...state.messages, { id: 6, message: action.message }],
       };
 
