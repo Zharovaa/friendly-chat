@@ -11,7 +11,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+import { maxLengthCreator, required } from '../../utils/validators/index';
 
 function Copyright(props) {
   return (
@@ -42,15 +43,14 @@ const SignIn = props => {
     setValues({ ...values, [prop]: value });
   };
 
-const submitData = () => {
-  console.log('SignIn: ', values)
-  return setValues({
-    email: '',
-    password: '',
-    rememberMe: false,
-  }) 
-}
-
+  const submitData = () => {
+    console.log('SignIn: ', values);
+    return setValues({
+      email: '',
+      password: '',
+      rememberMe: false,
+    });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -75,6 +75,8 @@ const submitData = () => {
           sx={{ mt: 1 }}
         >
           <TextField
+            error={!!required(values.email)}
+            helperText={required(values.email)}
             margin="normal"
             required
             fullWidth
@@ -87,6 +89,8 @@ const submitData = () => {
             autoFocus
           />
           <TextField
+            error={!!required(values.password)}
+            helperText={required(values.password)}
             margin="normal"
             required
             fullWidth
@@ -112,6 +116,7 @@ const submitData = () => {
             label="Remember me"
           />
           <Button
+            disabled={!(values.email && values.password)}
             fullWidth
             onClick={() => submitData()}
             variant="contained"

@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import s from './Posts.module.css';
 import Post from './Post/Post';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import { maxLengthCreator, required } from '../../../utils/validators';
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { maxLengthCreator, required } from '../../../utils/validators/index';
 
 const MyPosts = props => {
   /* Hook */
   const [value, setValue] = useState('');
 
   const maxLength10 = maxLengthCreator(10);
-
+  const validation = required(value) || maxLengthCreator(10)(value);
   /* Add new post */
   let onAddPost = () => {
     props.addPost(value);
@@ -33,39 +40,33 @@ const MyPosts = props => {
       >
         My Posts
       </Typography>
-      <Box
+      <Stack
+        direction="row"
+        spacing={3}
         sx={{
           width: '100%',
           margin: '30px 0',
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-          flexWrap: 'nowrap',
-          flexDirection: 'row',
         }}
       >
         <TextField
-          validate={[required, maxLength10]}
-          sx={{
-            width: '90%',
-          }}
+          error={!!validation}
+          helperText={validation}
+          sx={{ width: '90%' }}
           id="standard-basic"
           label="Add description"
-          variant="standard"
+          variant="filled"
           onChange={e => setValue(e.target.value)}
           value={value}
         />
-
         <Button
-          sx={{
-            width: '10%',
-          }}
+          sx={{ width: '10%' }}
           onClick={onAddPost}
           variant="contained"
+          disabled={!!validation}
         >
           Add post
         </Button>
-      </Box>
+      </Stack>
       <div>New post</div>
       <div className={s.posts}>
         {props.posts.map(p => (
