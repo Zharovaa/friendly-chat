@@ -7,7 +7,7 @@ import "./assets/scss/main.scss";
 import Navigation from "./components/Navigation";
 import UsersPage from "./pages/Users/";
 import ProfilePage from "./pages/Profile/";
-import SignIn from "./pages/SignIn/SignIn";
+import SignIn from "./pages/SignIn";
 import MessagesPage from "./pages/Messages/";
 
 /* Libraries */

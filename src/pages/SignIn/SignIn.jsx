@@ -11,8 +11,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useState } from 'react';
 import { maxLengthCreator, required } from '../../utils/validators/index';
+import { signIn } from '../../redux/auth-reducer';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { reduxForm } from 'redux-form';
 
 function Copyright(props) {
   return (
@@ -32,7 +35,7 @@ function Copyright(props) {
   );
 }
 
-const SignIn = props => {
+export default function SignIn(props) {
   const [values, setValues] = React.useState({
     email: '',
     password: '',
@@ -45,12 +48,17 @@ const SignIn = props => {
 
   const submitData = () => {
     console.log('SignIn: ', values);
+    props.signIn(values.email, values.password, values.rememberMe);
     return setValues({
       email: '',
       password: '',
       rememberMe: false,
     });
   };
+
+  if (props.isAuth) {
+    return <Redirect to={'/profile'} />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -141,6 +149,4 @@ const SignIn = props => {
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
-};
-
-export default SignIn;
+}
