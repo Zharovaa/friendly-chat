@@ -13,13 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { Redirect } from 'react-router';
 
 const Navigation = props => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const pages = ['Users', 'Messages', 'News', 'Music'];
-  const settings = ['Profile', 'Sign-in'];
+  const settings = ['Profile', 'Sign-out'];
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -36,6 +37,37 @@ const Navigation = props => {
     setAnchorElUser(null);
   };
 
+  if (!props.isAuth)
+    return (
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: '#a985e9', boxShadow: 'none' }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <PeopleAltIcon
+              sx={{ display:  'flex',   justifyContent: 'center' }}
+            />
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: 'flex',
+                justifyContent: 'center',
+                flexGrow: 2,
+                fontFamily: 'Patrick Hand',
+                fontWeight: 700,
+                letterSpacing: '.2rem',
+                color: 'inherit',
+              }}
+            >
+              Friendly-chat
+            </Typography>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    );
   return (
     <AppBar
       position="static"
@@ -64,7 +96,7 @@ const Navigation = props => {
             <IconButton
               size="large"
               aria-label="account of current user"
-              aria-controls="menu-appbar"
+              aria-controls="menu-appear"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
@@ -183,4 +215,5 @@ const Navigation = props => {
     </AppBar>
   );
 };
+
 export default Navigation;
