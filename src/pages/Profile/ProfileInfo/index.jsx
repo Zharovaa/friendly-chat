@@ -3,7 +3,7 @@ import ProfileInfo from './ProfileInfo';
 import * as axios from 'axios';
 import { setUserProfile } from '../../../redux/profile-reducer';
 import { withAuthRedirect } from '../../../hoc/AuthRedirect';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import getStatus from '../../../redux/profile-reducer';
@@ -19,7 +19,8 @@ const ProfileContainer = props => {
         props.setUserProfile(response.data);
         props.getStatus(userId);
       });
-  }, []);
+  });
+
 
   return (
     <ProfileInfo

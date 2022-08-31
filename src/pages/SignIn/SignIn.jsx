@@ -37,8 +37,8 @@ function Copyright(props) {
 
 export default function SignIn(props) {
   const [values, setValues] = React.useState({
-    email: '',
-    password: '',
+    email: 'niobium1441@gmail.com',
+    password: 'Galexi888',
     rememberMe: false,
   });
 
@@ -62,7 +62,7 @@ export default function SignIn(props) {
     return <Redirect to={'/profile'} />;
   }
 
-  const SignInForm = props => {
+  
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -143,5 +143,5 @@ export default function SignIn(props) {
       </Container>
     );
   };
-}
-const SignInReduxForm = reduxForm({ form: 'signIn' })(SignInForm);
+
+
