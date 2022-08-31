@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-/*export function withAuthRedirect(Component) {
+export function withAuthRedirect(Component) {
   class RedirectContainer extends React.Component {
     render() {
-      if (!this.props.isAuth) return <Redirect to={"/login"} />;
+      if (!this.props.isAuth) return <Redirect to={'/sign-in'} />;
       return <Component {...this.props} />;
     }
-
-  let mapStateToPropsForRedirect = (state) => ({
+  }
+  let mapStateToPropsForRedirect = state => ({
     isAuth: state.auth.isAuth,
   });
   let ConnectedAuthContainer = connect(mapStateToPropsForRedirect)(
@@ -17,4 +17,3 @@ import { Redirect } from "react-router-dom";
   );
   return ConnectedAuthContainer;
 }
-  }*/

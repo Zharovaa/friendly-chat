@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { signOut } from '../../redux/auth-reducer';
 import { render } from '@testing-library/react';
 
-
-
 const mapStateToProps = state => {
   return {
     isAuth: state.auth.isAuth,
@@ -14,12 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signOut: (email, password, rememberMe) => {
-      dispatch(signOut(email, password, rememberMe));
-    },
+    signOut: () => dispatch(signOut()),
   };
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

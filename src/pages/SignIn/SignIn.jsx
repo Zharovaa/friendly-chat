@@ -42,6 +42,8 @@ export default function SignIn(props) {
     rememberMe: false,
   });
 
+  
+
   const handleChange = (prop, value) => {
     setValues({ ...values, [prop]: value });
   };
@@ -59,81 +61,87 @@ export default function SignIn(props) {
   if (props.isAuth) {
     return <Redirect to={'/profile'} />;
   }
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+
+  const SignInForm = props => {
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <Box
-          component="form"
-          onSubmit={props.handleSubmit}
-          noValidate
-          sx={{ mt: 1 }}
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
-          <TextField
-            error={!!required(values.email)}
-            helperText={required(values.email)}
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            value={values.email}
-            onChange={event => handleChange('email', event.target.value)}
-            autoFocus
-          />
-          <TextField
-            error={!!required(values.password)}
-            helperText={required(values.password)}
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            value={values.password}
-            onChange={event => handleChange('password', event.target.value)}
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="remember"
-                checked={values.rememberMe}
-                onChange={event =>
-                  handleChange('rememberMe', event.target.checked)
-                }
-                color="primary"
-              />
-            }
-            label="Remember me"
-          />
-          <Button
-            disabled={!(values.email && values.password)}
-            fullWidth
-            onClick={() => submitData()}
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={props.handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            Sign In
-          </Button>
+            <TextField
+            {...props.error}
+              error={!!required(values.email)}
+              helperText={required(values.email)}
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={values.email}
+              onChange={event => handleChange('email', event.target.value)}
+              autoFocus
+            />
+            <TextField
+              error={!!required(values.password)}
+              helperText={required(values.password)}
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              value={values.password}
+              onChange={event => handleChange('password', event.target.value)}
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value="remember"
+                  checked={values.rememberMe}
+                  onChange={event =>
+                    handleChange('rememberMe', event.target.checked)
+                  }
+                  color="primary"
+                />
+              }
+              label="Remember me"
+            />
+            <Button
+              disabled={!(values.email && values.password)}
+              fullWidth
+              onClick={() => submitData()}
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Container>
-  );
+      </Container>
+    );
+  };
 }
+const SignInReduxForm = reduxForm({ form: 'signIn' })(SignInForm);

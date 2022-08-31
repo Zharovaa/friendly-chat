@@ -14,13 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
 
 const Navigation = props => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const pages = ['Users', 'Messages', 'News', 'Music'];
-  const settings = ['Profile', 'Sign-out'];
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +37,11 @@ const Navigation = props => {
     setAnchorElUser(null);
   };
 
+  const handleSignOut = () => {
+    setAnchorElUser(null);
+    props.signOut();
+  };
+
   if (!props.isAuth)
     return (
       <AppBar
@@ -45,9 +50,7 @@ const Navigation = props => {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <PeopleAltIcon
-              sx={{ display:  'flex',   justifyContent: 'center' }}
-            />
+            <PeopleAltIcon sx={{ display: 'flex', justifyContent: 'center' }} />
             <Typography
               variant="h5"
               noWrap
@@ -198,16 +201,12 @@ const Navigation = props => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <NavLink
-                    to={`/${setting.toLowerCase()}`}
-                    className={'item-menu'}
-                  >
-                    {setting}
-                  </NavLink>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <NavLink to={`/profile`} className={'item-menu'}>
+                  Profile
+                </NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign-out</MenuItem>
             </Menu>
           </Box>
         </Toolbar>

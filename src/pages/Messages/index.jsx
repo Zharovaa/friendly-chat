@@ -3,6 +3,7 @@ import { sendMessageCreator } from "../../redux/messages-reducer";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 import MessagesPage from "./Messages";
+import { withAuthRedirect } from "../../hoc/AuthRedirect";
 
 let mapStateToProps = (state) => {
   return {
@@ -20,9 +21,8 @@ let mapDispatchToProps = (dispatch) => {
 };
 
 /* Redirect included */
-// export default compose(
-//   connect(mapStateToProps, mapDispatchToProps),
-//   withRouter
-//   withAuthRedirect
-// )(MessagesPage);
-export default connect(mapStateToProps, mapDispatchToProps)(MessagesPage);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  withAuthRedirect
+)(MessagesPage);

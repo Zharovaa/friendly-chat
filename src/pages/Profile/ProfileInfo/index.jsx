@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import ProfileInfo from "./ProfileInfo";
-import * as axios from "axios";
-import { setUserProfile } from "../../../redux/profile-reducer";
-import { withAuthRedirect } from "../../../hoc/AuthRedirect";
-import { withRouter } from "react-router-dom";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import getStatus from "../../../redux/profile-reducer";
-import updateStatus from "../../../redux/profile-reducer";
+import React, { useEffect } from 'react';
+import ProfileInfo from './ProfileInfo';
+import * as axios from 'axios';
+import { setUserProfile } from '../../../redux/profile-reducer';
+import { withAuthRedirect } from '../../../hoc/AuthRedirect';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import getStatus from '../../../redux/profile-reducer';
+import updateStatus from '../../../redux/profile-reducer';
 
-const ProfileContainer = (props) => {
+const ProfileContainer = props => {
   useEffect(() => {
     let userId = props.match.params.userId;
     if (!userId) userId = 2;
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-      .then((response) => {
+      .then(response => {
         props.setUserProfile(response.data);
         props.getStatus(userId);
       });
@@ -31,7 +31,7 @@ const ProfileContainer = (props) => {
   );
 };
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = state => ({
   profile: state.profilePage.profile,
   isAuth: state.auth.isAuth,
   status: state.profilePage.status,
@@ -40,6 +40,6 @@ let mapStateToProps = (state) => ({
 /* Redirect included */
 export default compose(
   connect(mapStateToProps, { setUserProfile, getStatus, updateStatus }),
-  withRouter
-  // withAuthRedirect
+  withRouter,
+  withAuthRedirect
 )(ProfileContainer);
