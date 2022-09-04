@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 /* Styles */
 import './assets/scss/main.scss';
@@ -11,10 +12,11 @@ import SignIn from './pages/SignIn';
 import MessagesPage from './pages/Messages/';
 
 /* Libraries */
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { CircularProgress, Container } from '@mui/material';
 import { useDispatch } from 'redux-react-hook';
 import { getAuthUserData } from './redux/auth-reducer';
+import { compose } from 'redux';
 
 const App = () => {
   return (
@@ -32,4 +34,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default compose(
+  withRouter,
+  connect(null, {getAuthUserData}))(App)
+;

@@ -10,16 +10,17 @@ import getStatus from '../../../redux/profile-reducer';
 import updateStatus from '../../../redux/profile-reducer';
 
 const ProfileContainer = props => {
+  
   useEffect(() => {
     let userId = props.match.params.userId;
-    if (!userId) userId = 2;
-    axios
+    if (!userId) userId = this.props.authorizedUserId;
+    return axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then(response => {
         props.setUserProfile(response.data);
         props.getStatus(userId);
       });
-  });
+  }, []);
 
 
   return (
@@ -36,6 +37,7 @@ let mapStateToProps = state => ({
   profile: state.profilePage.profile,
   isAuth: state.auth.isAuth,
   status: state.profilePage.status,
+  authorizedUserId: state.auth.userId,
 });
 
 /* Redirect included */
