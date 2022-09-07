@@ -17,8 +17,18 @@ import { CircularProgress, Container } from '@mui/material';
 import { useDispatch } from 'redux-react-hook';
 import { getAuthUserData } from './redux/auth-reducer';
 import { compose } from 'redux';
+import { initializeApp } from './redux/app-reducer';
+import { render } from '@testing-library/react';
+import { useEffect } from 'react';
 
-const App = () => {
+const App = props => {
+  useEffect(() => {
+    props.initializeApp();
+  }, []);
+  if (!props.initialized) {
+    return <CircularProgress />;
+  }
+
   return (
     <div className="app-wrapper">
       <Navigation />
@@ -33,8 +43,11 @@ const App = () => {
     </div>
   );
 };
+const mapStateToProps = state => ({
+  initialized: state.app.initialized,
+});
 
 export default compose(
   withRouter,
-  connect(null, {getAuthUserData}))(App)
-;
+  connect(mapStateToProps, { initializeApp })
+)(App);

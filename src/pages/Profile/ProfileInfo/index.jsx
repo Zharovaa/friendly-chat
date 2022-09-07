@@ -10,10 +10,12 @@ import getStatus from '../../../redux/profile-reducer';
 import updateStatus from '../../../redux/profile-reducer';
 
 const ProfileContainer = props => {
-  
   useEffect(() => {
     let userId = props.match.params.userId;
-    if (!userId) userId = this.props.authorizedUserId;
+    if (!userId) {
+      userId = props.authorizedUserId;
+    }
+
     return axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then(response => {
@@ -21,7 +23,6 @@ const ProfileContainer = props => {
         props.getStatus(userId);
       });
   }, []);
-
 
   return (
     <ProfileInfo

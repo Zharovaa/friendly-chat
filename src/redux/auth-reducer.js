@@ -41,7 +41,7 @@ export const removeAuthUserData = () => ({
 
 // Second step of the logout functionality
 export const getAuthUserData = () => dispatch => {
-  authAPI.me().then(response => {
+  return authAPI.me().then(response => {
     if (response.data.resultCode === 0) {
       let { id, login, email } = response.data.data;
       dispatch(setAuthUserData(id, email, login));
