@@ -75,8 +75,8 @@ const Users = (props) => {
         {isFetching ? (
           <CircularProgress color="secondary" />
         ) : (
-          users.map((user) => (
-            <User user={user} follow={follow} unfollow={unfollow} />
+          users.map((user, index) => (
+            <User user={user} key={index} follow={follow} unfollow={unfollow} />
           ))
         )}
       </Box>

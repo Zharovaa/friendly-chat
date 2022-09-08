@@ -69,8 +69,8 @@ const MyPosts = props => {
       </Stack>
       <div>New post</div>
       <div className={s.posts}>
-        {props.posts.map(p => (
-          <Post message={p.message} likesCount key={p.likesCount} />
+        {props.posts.map((p, index) => (
+          <Post message={p.message} likesCount key={index} />
         ))}
       </div>
     </Container>

@@ -130,8 +130,8 @@ const Navigation = props => {
                 },
               }}
             >
-              {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
                   <NavLink
                     to={`/${page.toLowerCase()}`}
                     className={'item-menu'}
@@ -159,7 +159,7 @@ const Navigation = props => {
             Friendly-chat
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(page => (
+            {pages.map((page, index) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
