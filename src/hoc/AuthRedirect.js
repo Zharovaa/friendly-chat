@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom';
 
 export function withAuthRedirect(Component) {
   function RedirectContainer(props) {
-    useEffect(() => { console.log(props.isAuth) }, [props.isAuth])
+    useEffect(() => {
+      console.log(props.isAuth);
+    }, [props.isAuth]);
     if (!props.isAuth) return <Redirect to={'/sign-in'} />;
     return <Component {...props} />;
   }
