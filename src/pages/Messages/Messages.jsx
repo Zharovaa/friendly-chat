@@ -30,8 +30,6 @@ export default function MessagesPage(props) {
   /* Variables from the state/props */
   const { dialogs, messages } = props.messagesPage;
 
-  /* Redirect to the login */
-  if (!props.isAuth === false) return <Redirect to="/sign-in" />;
   return (
     <Stack
       direction="row"

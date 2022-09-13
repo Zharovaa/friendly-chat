@@ -15,6 +15,7 @@ import {
   getCurrentPage,
   getIsFetching,
   getFollowingInProgress,
+  getUsersSuperSelector,
 } from '../../redux/users-selectors';
 
 let mapStateToProps = state => {
