@@ -46,15 +46,14 @@ export const addPostActionCreator = text => ({
 export const setUserProfile = profile => ({
   type: SET_USER_PROFILE,
   profile,
-});
+}); 
 export const setStatus = status => ({ type: SET_STATUS, status });
 
-export const updateStatus = status => dispatch => {
-  profileAPI.updateStatus(status).then(response => {
+export const updateStatus = status => async(dispatch) => {
+  let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
     }
-  });
-};
+  };
 
 export default profileReducer;
