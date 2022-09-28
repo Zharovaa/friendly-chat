@@ -2,14 +2,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export const Textarea = ({ input, meta, ...props }) => {
-  const hasError = meta.touched && meta.error;
+export const Textarea = ({ input, meta: { touched, error }, ...props }) => {
+  const hasError = touched && error;
   return (
     <div>
       <div>
         <textarea {...props.input} {...props} />
       </div>
-      {hasError && <span>{meta.error}</span>}
+      {hasError && <span>{error}</span>}
     </div>
   );
 };

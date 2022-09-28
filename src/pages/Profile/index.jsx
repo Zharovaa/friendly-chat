@@ -1,13 +1,10 @@
-import React from "react";
-
-/* Styles (modules) */
-import s from "./Profile.module.css";
+import React from 'react';
 
 /* Components */
-import ProfileContainer from "./ProfileInfo";
-import PostsContainer from "./Posts";
+import ProfileContainer from './ProfileInfo';
+import PostsContainer from './Posts';
 
-const Profile = (props) => {
+const Profile = props => {
   return (
     <div className="profile-page">
       <ProfileContainer
